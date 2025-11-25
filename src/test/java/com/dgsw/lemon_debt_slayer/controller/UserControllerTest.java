@@ -56,8 +56,8 @@ class UserControllerTest {
     void createUser() throws Exception {
         // given
         final String url = "/api/users";
-        final String username = "testuser";
-        final CreateUserRequest userRequest = new CreateUserRequest(username);
+        final String userId = "test@test.com";
+        final CreateUserRequest userRequest = new CreateUserRequest(userId);
         final String requestBody = objectMapper.writeValueAsString(userRequest);
 
         // when
@@ -71,22 +71,22 @@ class UserControllerTest {
         List<User> users = userRepository.findAll();
         assertThat(users).hasSize(1);
         User savedUser = users.get(0);
-        assertThat(savedUser.getUsername()).isEqualTo(username);
+        assertThat(savedUser.getUserId()).isEqualTo(userId);
         assertThat(savedUser.getCurrentMoney()).isEqualTo(INITIAL_MONEY);
         assertThat(savedUser.getTotalDebt()).isEqualTo(INITIAL_DEBT);
     }
 
-    @DisplayName("ID로 사용자 조회 테스트")
+    @DisplayName("UserId로 사용자 조회 테스트")
     @Test
-    void findUserById() throws Exception {
+    void findUserByUserId() throws Exception {
         // given
-        final String username = "testuser";
-        User savedUser = userRepository.save(User.builder()
-                .username(username)
+        final String userId = "test@test.com";
+        userRepository.save(User.builder()
+                .userId(userId)
                 .currentMoney(INITIAL_MONEY)
                 .totalDebt(INITIAL_DEBT)
                 .build());
-        final String url = "/api/users/" + savedUser.getId();
+        final String url = "/api/users/" + userId;
 
         // when
         final ResultActions resultActions = mockMvc.perform(get(url));
@@ -94,8 +94,7 @@ class UserControllerTest {
         // then
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(savedUser.getId()))
-                .andExpect(jsonPath("$.username").value(username))
+                .andExpect(jsonPath("$.userId").value(userId))
                 .andExpect(jsonPath("$.currentMoney").value(INITIAL_MONEY))
                 .andExpect(jsonPath("$.totalDebt").value(INITIAL_DEBT));
     }
@@ -104,15 +103,16 @@ class UserControllerTest {
     @Test
     void updateUser() throws Exception {
         // given
-        User savedUser = userRepository.save(User.builder()
-                .username("beforeUpdate")
+        final String originalUserId = "beforeUpdate@test.com";
+        userRepository.save(User.builder()
+                .userId(originalUserId)
                 .currentMoney(INITIAL_MONEY)
                 .totalDebt(INITIAL_DEBT)
                 .build());
 
-        final String url = "/api/users/" + savedUser.getId();
-        final String updatedUsername = "afterUpdate";
-        final UpdateUserRequest updateUserRequest = new UpdateUserRequest(updatedUsername, null, null);
+        final String url = "/api/users/" + originalUserId;
+        final String updatedUserId = "afterUpdate@test.com";
+        final UpdateUserRequest updateUserRequest = new UpdateUserRequest(updatedUserId, null, null);
         final String requestBody = objectMapper.writeValueAsString(updateUserRequest);
 
         // when
@@ -123,9 +123,32 @@ class UserControllerTest {
         // then
         result.andExpect(status().isOk());
 
-        User updatedUser = userRepository.findById(savedUser.getId())
+        User updatedUser = userRepository.findByUserId(updatedUserId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        assertThat(updatedUser.getUsername()).isEqualTo(updatedUsername);
+        assertThat(updatedUser.getUserId()).isEqualTo(updatedUserId);
+    }
+
+    @DisplayName("사용자 삭제 테스트")
+    @Test
+    void deleteUser() throws Exception {
+        // given
+        final String userId = "test@test.com";
+        userRepository.save(User.builder()
+                .userId(userId)
+                .currentMoney(INITIAL_MONEY)
+                .totalDebt(INITIAL_DEBT)
+                .build());
+
+        final String url = "/api/users/" + userId;
+
+        // when
+        ResultActions result = mockMvc.perform(delete(url));
+
+        // then
+        result.andExpect(status().isNoContent());
+
+        List<User> users = userRepository.findAll();
+        assertThat(users).isEmpty();
     }
 }

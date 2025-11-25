@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class UpdateUserRequest {
-    private String username;
+    private String userId;
     private Long currentMoney;
     private Long totalDebt;
 }

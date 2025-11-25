@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class CreateUserRequest {
-    private String username;
+    private String userId;
 }

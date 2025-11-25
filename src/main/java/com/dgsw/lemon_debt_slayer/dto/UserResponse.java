@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 public class UserResponse {
     private Long id;
-    private String username;
+    private String userId;
     private Long currentMoney;
     private Long totalDebt;
     private LocalDateTime createAt;
@@ -18,7 +18,7 @@ public class UserResponse {
 
     public UserResponse(User user) {
         this.id = user.getId();
-        this.username = user.getUsername();
+        this.userId = user.getUserId();
         this.currentMoney = user.getCurrentMoney();
         this.totalDebt = user.getTotalDebt();
         this.createAt = user.getCreateAt();

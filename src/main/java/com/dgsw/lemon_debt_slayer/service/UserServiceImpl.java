@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserResponse createUser(CreateUserRequest request) {
         User user = User.builder()
-                .username(request.getUsername())
+                .userId(request.getUserId())
                 .currentMoney(INITIAL_MONEY)
                 .totalDebt(INITIAL_DEBT)
                 .build();
@@ -30,21 +30,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse findUserById(Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User not found: " + id));
+    public UserResponse findUserByUserId(String userId) {
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userId));
         return new UserResponse(user);
     }
 
     @Override
     @Transactional
-    public UserResponse updateUser(Long id, UpdateUserRequest request) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User not found: " + id));
+    public UserResponse updateUser(String userId, UpdateUserRequest request) {
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userId));
 
         // Update fields if provided in the request
-        if (request.getUsername() != null) {
-            user.setUsername(request.getUsername());
+        if (request.getUserId() != null) {
+            user.setUserId(request.getUserId());
         }
         if (request.getCurrentMoney() != null) {
             user.setCurrentMoney(request.getCurrentMoney());
@@ -56,5 +56,13 @@ public class UserServiceImpl implements UserService {
         // But for clarity or if specific update logic is needed, userRepository.save(user) can be called.
 
         return new UserResponse(user);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(String userId) {
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userId));
+        userRepository.delete(user);
     }
 }

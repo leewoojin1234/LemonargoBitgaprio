@@ -19,8 +19,8 @@ public class User extends BaseTimeEntity {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+    @Column(name = "user_id", nullable = false, unique = true)
+    private String userId;
 
     @Column(name = "current_money", nullable = false)
     private Long currentMoney;
@@ -29,14 +29,14 @@ public class User extends BaseTimeEntity {
     private Long totalDebt;
 
     @Builder
-    public User(String username, Long currentMoney, Long totalDebt) {
-        this.username = username;
+    public User(String userId, Long currentMoney, Long totalDebt) {
+        this.userId = userId;
         this.currentMoney = currentMoney;
         this.totalDebt = totalDebt;
     }
 
-    public void update(String username, Long currentMoney, Long totalDebt) {
-        this.username = username;
+    public void update(String userId, Long currentMoney, Long totalDebt) {
+        this.userId = userId;
         this.currentMoney = currentMoney;
         this.totalDebt = totalDebt;
     }

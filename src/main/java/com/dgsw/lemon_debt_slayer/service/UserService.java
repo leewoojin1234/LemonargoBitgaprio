@@ -7,6 +7,7 @@ import com.dgsw.lemon_debt_slayer.dto.UserResponse;
 
 public interface UserService {
     UserResponse createUser(CreateUserRequest request);
-    UserResponse findUserById(Long id);
-    UserResponse updateUser(Long id, UpdateUserRequest request);
+    UserResponse findUserByUserId(String userId);
+    UserResponse updateUser(String userId, UpdateUserRequest request);
+    void deleteUser(String userId);
 }
