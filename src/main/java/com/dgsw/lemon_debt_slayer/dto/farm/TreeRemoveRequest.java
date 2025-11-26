@@ -1,18 +1,14 @@
-package com.dgsw.lemon_debt_slayer.dto;
+package com.dgsw.lemon_debt_slayer.dto.farm;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class HarvestRequest {
-    private Integer x;
-    private Integer y;
+public class TreeRemoveRequest {
     private Long playerId;
 }

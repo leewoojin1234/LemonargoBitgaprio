@@ -1,9 +1,9 @@
 package com.dgsw.lemon_debt_slayer.service;
 
 import com.dgsw.lemon_debt_slayer.domain.User;
-import com.dgsw.lemon_debt_slayer.dto.CreateUserRequest;
-import com.dgsw.lemon_debt_slayer.dto.UpdateUserRequest;
-import com.dgsw.lemon_debt_slayer.dto.UserResponse;
+import com.dgsw.lemon_debt_slayer.dto.user.CreateUserRequest;
+import com.dgsw.lemon_debt_slayer.dto.user.UpdateUserRequest;
+import com.dgsw.lemon_debt_slayer.dto.user.UserResponse;
 import com.dgsw.lemon_debt_slayer.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

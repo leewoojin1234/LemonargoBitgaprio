@@ -1,11 +1,10 @@
 package com.dgsw.lemon_debt_slayer.controller;
 
-import com.dgsw.lemon_debt_slayer.dto.DebtHistoryResponse;
-import com.dgsw.lemon_debt_slayer.dto.RepayDebtRequest;
+import com.dgsw.lemon_debt_slayer.dto.debt.DebtHistoryResponse;
+import com.dgsw.lemon_debt_slayer.dto.debt.RepayDebtRequest;
 import com.dgsw.lemon_debt_slayer.service.DebtService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

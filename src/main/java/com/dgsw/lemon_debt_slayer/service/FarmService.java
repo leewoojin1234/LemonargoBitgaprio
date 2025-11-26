@@ -1,7 +1,6 @@
 package com.dgsw.lemon_debt_slayer.service;
 
-import com.dgsw.lemon_debt_slayer.domain.LemonTree;
-import com.dgsw.lemon_debt_slayer.dto.*;
+import com.dgsw.lemon_debt_slayer.dto.farm.*;
 
 /**
  * Service Interface: 비즈니스 로직의 계약(Contract) 정의

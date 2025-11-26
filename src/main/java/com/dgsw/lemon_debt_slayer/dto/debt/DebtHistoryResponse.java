@@ -1,4 +1,4 @@
-package com.dgsw.lemon_debt_slayer.dto;
+package com.dgsw.lemon_debt_slayer.dto.debt;
 
 import com.dgsw.lemon_debt_slayer.domain.DebtHistory;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.dgsw.lemon_debt_slayer.dto;
+package com.dgsw.lemon_debt_slayer.dto.farm;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

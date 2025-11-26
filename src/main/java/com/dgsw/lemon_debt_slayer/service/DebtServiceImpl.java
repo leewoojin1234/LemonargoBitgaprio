@@ -2,8 +2,8 @@ package com.dgsw.lemon_debt_slayer.service;
 
 import com.dgsw.lemon_debt_slayer.domain.DebtHistory;
 import com.dgsw.lemon_debt_slayer.domain.User;
-import com.dgsw.lemon_debt_slayer.dto.DebtHistoryResponse;
-import com.dgsw.lemon_debt_slayer.dto.RepayDebtRequest;
+import com.dgsw.lemon_debt_slayer.dto.debt.DebtHistoryResponse;
+import com.dgsw.lemon_debt_slayer.dto.debt.RepayDebtRequest;
 import com.dgsw.lemon_debt_slayer.repository.DebtHistoryRepository;
 import com.dgsw.lemon_debt_slayer.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -1,4 +1,4 @@
-package com.dgsw.lemon_debt_slayer.dto;
+package com.dgsw.lemon_debt_slayer.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

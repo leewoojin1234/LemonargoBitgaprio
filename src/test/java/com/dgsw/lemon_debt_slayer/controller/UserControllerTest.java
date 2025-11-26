@@ -1,8 +1,8 @@
 package com.dgsw.lemon_debt_slayer.controller;
 
 import com.dgsw.lemon_debt_slayer.domain.User;
-import com.dgsw.lemon_debt_slayer.dto.CreateUserRequest;
-import com.dgsw.lemon_debt_slayer.dto.UpdateUserRequest;
+import com.dgsw.lemon_debt_slayer.dto.user.CreateUserRequest;
+import com.dgsw.lemon_debt_slayer.dto.user.UpdateUserRequest;
 import com.dgsw.lemon_debt_slayer.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

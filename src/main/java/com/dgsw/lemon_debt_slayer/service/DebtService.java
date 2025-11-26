@@ -1,7 +1,7 @@
 package com.dgsw.lemon_debt_slayer.service;
 
-import com.dgsw.lemon_debt_slayer.dto.DebtHistoryResponse;
-import com.dgsw.lemon_debt_slayer.dto.RepayDebtRequest;
+import com.dgsw.lemon_debt_slayer.dto.debt.DebtHistoryResponse;
+import com.dgsw.lemon_debt_slayer.dto.debt.RepayDebtRequest;
 
 import java.util.List;
 

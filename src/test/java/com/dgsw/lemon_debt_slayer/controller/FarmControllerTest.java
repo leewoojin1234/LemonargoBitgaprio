@@ -1,11 +1,11 @@
 package com.dgsw.lemon_debt_slayer.controller;
 
-import com.dgsw.lemon_debt_slayer.dto.TreePurchaseRequest;
-import com.dgsw.lemon_debt_slayer.dto.TreeResponse;
-import com.dgsw.lemon_debt_slayer.dto.HarvestRequest;
-import com.dgsw.lemon_debt_slayer.dto.HarvestResponse;
-import com.dgsw.lemon_debt_slayer.dto.FarmViewResponse;
-import com.dgsw.lemon_debt_slayer.dto.TreeRemoveRequest;
+import com.dgsw.lemon_debt_slayer.dto.farm.TreePurchaseRequest;
+import com.dgsw.lemon_debt_slayer.dto.farm.TreeResponse;
+import com.dgsw.lemon_debt_slayer.dto.farm.HarvestRequest;
+import com.dgsw.lemon_debt_slayer.dto.farm.HarvestResponse;
+import com.dgsw.lemon_debt_slayer.dto.farm.FarmViewResponse;
+import com.dgsw.lemon_debt_slayer.dto.farm.TreeRemoveRequest;
 import com.dgsw.lemon_debt_slayer.service.FarmService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

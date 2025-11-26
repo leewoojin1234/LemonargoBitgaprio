@@ -1,6 +1,6 @@
 package com.dgsw.lemon_debt_slayer.controller;
 
-import com.dgsw.lemon_debt_slayer.dto.*;
+import com.dgsw.lemon_debt_slayer.dto.farm.*;
 import com.dgsw.lemon_debt_slayer.service.FarmService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

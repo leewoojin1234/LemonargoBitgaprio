@@ -1,4 +1,4 @@
-package com.dgsw.lemon_debt_slayer.dto;
+package com.dgsw.lemon_debt_slayer.dto.debt;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

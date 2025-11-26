@@ -1,7 +1,7 @@
 package com.dgsw.lemon_debt_slayer.service;
 
 import com.dgsw.lemon_debt_slayer.domain.User;
-import com.dgsw.lemon_debt_slayer.dto.RepayDebtRequest;
+import com.dgsw.lemon_debt_slayer.dto.debt.RepayDebtRequest;
 import com.dgsw.lemon_debt_slayer.repository.DebtHistoryRepository;
 import com.dgsw.lemon_debt_slayer.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
