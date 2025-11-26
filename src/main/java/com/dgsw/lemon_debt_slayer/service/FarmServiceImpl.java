@@ -1,8 +1,11 @@
 package com.dgsw.lemon_debt_slayer.service;
 
+import com.dgsw.lemon_debt_slayer.domain.DebtHistory;
 import com.dgsw.lemon_debt_slayer.domain.LemonTree;
+import com.dgsw.lemon_debt_slayer.domain.User;
 import com.dgsw.lemon_debt_slayer.dto.*;
 import com.dgsw.lemon_debt_slayer.repository.LemonTreeRepository;
+import com.dgsw.lemon_debt_slayer.repository.UserRepository;
 import com.dgsw.lemon_debt_slayer.service.FarmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,10 +29,14 @@ import java.util.List;
 public class FarmServiceImpl implements FarmService {
 
     private final LemonTreeRepository lemonTreeRepository;
+    private final UserRepository userRepository;
 
     private static final int FARM_WIDTH = 10;
     private static final int FARM_HEIGHT = 10;
     private static final int DEFAULT_PRODUCTION_RATE = 60;
+
+    private static final long treePrice = 30;
+
 
     /**
      * 비즈니스 로직: 나무 구매
@@ -63,6 +70,29 @@ public class FarmServiceImpl implements FarmService {
         // 4. Repository를 통한 저장
         LemonTree savedTree = lemonTreeRepository.save(newTree);
 
+
+        User user = userRepository.findById(request.getPlayerId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + request.getPlayerId()));
+
+        Long amount = treePrice;
+
+        if (user.getCurrentMoney() < amount) {
+            throw new IllegalArgumentException("Not enough money to repay debt.");
+        }
+        if (user.getTotalDebt() < amount) {
+            throw new IllegalArgumentException("Repayment amount exceeds total debt.");
+        }
+
+        user.setCurrentMoney(user.getCurrentMoney() - amount);
+        user.setTotalDebt(user.getTotalDebt() - amount);
+
+        DebtHistory debtHistory = DebtHistory.builder()
+                .user(user)
+                .repayAmount(amount)
+                .remainingDebt(user.getTotalDebt())
+                .build();
+
+
         log.info("나무 구매 완료 - PlayerId: {}, 좌표: ({}, {})",
                 request.getPlayerId(), request.getX(), request.getY());
 
@@ -93,6 +123,12 @@ public class FarmServiceImpl implements FarmService {
 
         log.info("레몬 수확 완료 - PlayerId: {}, 좌표: ({}, {}), 수확량: {}",
                 request.getPlayerId(), request.getX(), request.getY(), harvested);
+
+//        UserRepository userRepository = null;
+        User user = userRepository.findById(request.getPlayerId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + request.getPlayerId()));
+
+        user.setCurrntLemonCount(user.getCurrntLemonCount() + harvested);
 
         // 4. DTO 변환
         return HarvestResponse.builder()
@@ -184,7 +220,8 @@ public class FarmServiceImpl implements FarmService {
 
         if (producedCount > 0) {
             log.info("레몬 생산 완료 - 총 {}개 생성", producedCount);
-        }
+
+            }
     }
 
     // ===== Private Helper Methods (내부 비즈니스 로직) =====
@@ -252,4 +289,5 @@ public class FarmServiceImpl implements FarmService {
                 .currentLemons(tree.getCurrentLemons())
                 .build();
     }
+
 }

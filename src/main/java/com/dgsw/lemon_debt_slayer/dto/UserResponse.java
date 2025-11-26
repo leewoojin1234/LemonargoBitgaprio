@@ -13,6 +13,7 @@ public class UserResponse {
     private String userId;
     private Long currentMoney;
     private Long totalDebt;
+    private Long currentLemonCount;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 
@@ -21,6 +22,7 @@ public class UserResponse {
         this.userId = user.getUserId();
         this.currentMoney = user.getCurrentMoney();
         this.totalDebt = user.getTotalDebt();
+        this.currentLemonCount = user.getCurrntLemonCount();
         this.createAt = user.getCreateAt();
         this.updateAt = user.getUpdateAt();
     }

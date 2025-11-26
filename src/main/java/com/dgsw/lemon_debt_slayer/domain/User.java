@@ -28,16 +28,21 @@ public class User extends BaseTimeEntity {
     @Column(name = "total_debt", nullable = false)
     private Long totalDebt;
 
+    @Column(name = "currntLemonCount", nullable = false)
+    private Long currntLemonCount;
+
     @Builder
-    public User(String userId, Long currentMoney, Long totalDebt) {
+    public User(String userId, Long currentMoney, Long totalDebt, Long currntLemonCount) {
         this.userId = userId;
         this.currentMoney = currentMoney;
         this.totalDebt = totalDebt;
+        this.currntLemonCount = currntLemonCount;
     }
 
-    public void update(String userId, Long currentMoney, Long totalDebt) {
+    public void update(String userId, Long currentMoney, Long totalDebt, Long currntLemonCount){
         this.userId = userId;
         this.currentMoney = currentMoney;
         this.totalDebt = totalDebt;
+        this.currntLemonCount = currntLemonCount;
     }
 }
