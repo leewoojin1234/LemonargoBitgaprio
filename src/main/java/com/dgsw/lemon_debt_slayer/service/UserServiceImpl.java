@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 
     private static final Long INITIAL_DEBT = 1_000_000L; // 1,000,000 KRW
     private static final Long INITIAL_MONEY = 10_000L;  // 10,000 KRW
-    private static final Long INITIAL_LEMONCOUNT = 10_000L;  // 10,000 KRW
+    private static final Long INITIAL_LEMONCOUNT = 0L;  // 10,000 KRW
 
     @Override
     @Transactional
