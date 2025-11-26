@@ -61,7 +61,7 @@ public class DebtServiceImpl implements DebtService {
                 .collect(Collectors.toList());
     }
 
-    @Scheduled(cron = "0 0 0 * * *") // Run every day at midnight
+    @Scheduled(fixedDelay = 60000) // Run every 60 seconds
     @Transactional
     public void calculateDailyInterest() {
         List<User> users = userRepository.findAll();
