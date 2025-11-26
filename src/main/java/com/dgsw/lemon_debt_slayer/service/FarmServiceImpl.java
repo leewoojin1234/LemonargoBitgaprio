@@ -3,11 +3,10 @@ package com.dgsw.lemon_debt_slayer.service;
 import com.dgsw.lemon_debt_slayer.domain.LemonTree;
 import com.dgsw.lemon_debt_slayer.dto.*;
 import com.dgsw.lemon_debt_slayer.repository.LemonTreeRepository;
-import org.springframework.stereotype.Service;
-
-
+import com.dgsw.lemon_debt_slayer.service.FarmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -161,6 +160,7 @@ public class FarmServiceImpl implements FarmService {
      */
     @Override
     @Transactional
+    @Scheduled(fixedRate = 10000) // 10초마다 자동 실행
     public void produceLemons() {
         List<LemonTree> allTrees = lemonTreeRepository.findAll();
         LocalDateTime now = LocalDateTime.now();

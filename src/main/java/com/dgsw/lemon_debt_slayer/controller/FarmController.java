@@ -1,10 +1,12 @@
 package com.dgsw.lemon_debt_slayer.controller;
+
 import com.dgsw.lemon_debt_slayer.dto.*;
 import com.dgsw.lemon_debt_slayer.service.FarmService;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.http.HttpStatus;
 
 /**
@@ -65,5 +67,34 @@ public class FarmController {
             @RequestBody TreeRemoveRequest request) {
         farmService.removeTree(x, y, request.getPlayerId());
         return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * IllegalArgumentException 처리
+     * 비즈니스 로직 검증 실패 시 400 Bad Request 반환
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException e) {
+        ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    /**
+     * 예상치 못한 예외 처리
+     * 500 Internal Server Error 반환
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse("서버 오류가 발생했습니다: " + e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
+
+    /**
+     * 에러 응답 DTO
+     */
+    @Getter
+    @AllArgsConstructor
+    public static class ErrorResponse {
+        private String message;
     }
 }
