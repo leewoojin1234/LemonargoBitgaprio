@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     private static final Long INITIAL_DEBT = 1_000_000L; // 1,000,000 KRW
     private static final Long INITIAL_MONEY = 10_000L;  // 10,000 KRW
+    private static final Long INITIAL_LEMONCOUNT = 10_000L;  // 10,000 KRW
 
     @Override
     @Transactional
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
                 .userId(request.getUserId())
                 .currentMoney(INITIAL_MONEY)
                 .totalDebt(INITIAL_DEBT)
+                .currntLemonCount(INITIAL_LEMONCOUNT)
                 .build();
         return new UserResponse(userRepository.save(user));
     }
@@ -43,9 +45,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userId));
 
         // Update fields if provided in the request
-        if (request.getUserId() != null) {
-            user.setUserId(request.getUserId());
-        }
         if (request.getCurrentMoney() != null) {
             user.setCurrentMoney(request.getCurrentMoney());
         }

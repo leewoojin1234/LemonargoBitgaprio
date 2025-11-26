@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @Getter
 public class UpdateUserRequest {
 
-    private String userId;
-
     @PositiveOrZero(message = "현재 보유 금액은 0 이상이어야 합니다.")
     private Long currentMoney;
 

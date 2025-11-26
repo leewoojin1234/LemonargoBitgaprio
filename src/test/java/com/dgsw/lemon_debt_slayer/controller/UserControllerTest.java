@@ -85,6 +85,7 @@ class UserControllerTest {
                 .userId(userId)
                 .currentMoney(INITIAL_MONEY)
                 .totalDebt(INITIAL_DEBT)
+                .currntLemonCount(0L)
                 .build());
         final String url = "/api/users/" + userId;
 
@@ -104,15 +105,17 @@ class UserControllerTest {
     void updateUser() throws Exception {
         // given
         final String originalUserId = "beforeUpdate@test.com";
-        userRepository.save(User.builder()
+        User savedUser = userRepository.save(User.builder()
                 .userId(originalUserId)
                 .currentMoney(INITIAL_MONEY)
                 .totalDebt(INITIAL_DEBT)
+                .currntLemonCount(0L)
                 .build());
 
         final String url = "/api/users/" + originalUserId;
-        final String updatedUserId = "afterUpdate@test.com";
-        final UpdateUserRequest updateUserRequest = new UpdateUserRequest(updatedUserId, null, null);
+        final Long updatedMoney = 20000L;
+        final Long updatedDebt = 500000L;
+        final UpdateUserRequest updateUserRequest = new UpdateUserRequest(updatedMoney, updatedDebt);
         final String requestBody = objectMapper.writeValueAsString(updateUserRequest);
 
         // when
@@ -123,10 +126,11 @@ class UserControllerTest {
         // then
         result.andExpect(status().isOk());
 
-        User updatedUser = userRepository.findByUserId(updatedUserId)
+        User updatedUser = userRepository.findByUserId(originalUserId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        assertThat(updatedUser.getUserId()).isEqualTo(updatedUserId);
+        assertThat(updatedUser.getCurrentMoney()).isEqualTo(updatedMoney);
+        assertThat(updatedUser.getTotalDebt()).isEqualTo(updatedDebt);
     }
 
     @DisplayName("사용자 삭제 테스트")
@@ -138,6 +142,7 @@ class UserControllerTest {
                 .userId(userId)
                 .currentMoney(INITIAL_MONEY)
                 .totalDebt(INITIAL_DEBT)
+                .currntLemonCount(0L)
                 .build());
 
         final String url = "/api/users/" + userId;

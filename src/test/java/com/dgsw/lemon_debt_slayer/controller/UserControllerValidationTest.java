@@ -65,7 +65,7 @@ public class UserControllerValidationTest {
     void whenUpdateUserWithNegativeMoney_thenFail() throws Exception {
         // given
         final String url = "/api/users/some-user";
-        final UpdateUserRequest userRequest = new UpdateUserRequest(null, -100L, null);
+        final UpdateUserRequest userRequest = new UpdateUserRequest(-100L, null);
         final String requestBody = objectMapper.writeValueAsString(userRequest);
 
         // when
@@ -82,7 +82,7 @@ public class UserControllerValidationTest {
     void whenUpdateUserWithNegativeDebt_thenFail() throws Exception {
         // given
         final String url = "/api/users/some-user";
-        final UpdateUserRequest userRequest = new UpdateUserRequest(null, null, -1000L);
+        final UpdateUserRequest userRequest = new UpdateUserRequest(null, -1000L);
         final String requestBody = objectMapper.writeValueAsString(userRequest);
 
         // when
@@ -114,7 +114,7 @@ public class UserControllerValidationTest {
         // given
         final String nonExistentUserId = "nonexistent@test.com";
         final String url = "/api/users/" + nonExistentUserId;
-        final UpdateUserRequest userRequest = new UpdateUserRequest("updated@test.com", 100L, 1000L);
+        final UpdateUserRequest userRequest = new UpdateUserRequest(100L, 1000L);
         final String requestBody = objectMapper.writeValueAsString(userRequest);
 
         // when
