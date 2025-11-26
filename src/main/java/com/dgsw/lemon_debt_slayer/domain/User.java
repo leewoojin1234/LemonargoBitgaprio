@@ -10,7 +10,6 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter // For update operations
 @Table(name = "users") // "user" is a reserved keyword in H2
 public class User extends BaseTimeEntity {
 
@@ -19,15 +18,18 @@ public class User extends BaseTimeEntity {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(name = "user_id", nullable = false, unique = true)
+    @Column(name = "user_id", nullable = false, unique = true, updatable = false)
     private String userId;
 
+    @Setter
     @Column(name = "current_money", nullable = false)
     private Long currentMoney;
 
+    @Setter
     @Column(name = "total_debt", nullable = false)
     private Long totalDebt;
 
+    @Setter
     @Column(name = "currntLemonCount", nullable = false)
     private Long currntLemonCount;
 
@@ -39,8 +41,7 @@ public class User extends BaseTimeEntity {
         this.currntLemonCount = currntLemonCount;
     }
 
-    public void update(String userId, Long currentMoney, Long totalDebt, Long currntLemonCount){
-        this.userId = userId;
+    public void update(Long currentMoney, Long totalDebt, Long currntLemonCount){
         this.currentMoney = currentMoney;
         this.totalDebt = totalDebt;
         this.currntLemonCount = currntLemonCount;

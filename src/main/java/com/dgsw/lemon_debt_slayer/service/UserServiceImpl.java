@@ -45,9 +45,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userId));
 
         // Update fields if provided in the request
-        if (request.getUserId() != null) {
-            user.setUserId(request.getUserId());
-        }
         if (request.getCurrentMoney() != null) {
             user.setCurrentMoney(request.getCurrentMoney());
         }
